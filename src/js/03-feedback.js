@@ -24,17 +24,15 @@ function addLocalStorage(e){
 	localStorage.setItem(("feedback-form-state"), JSON.stringify(localObj));
 }
 
-function populateTextarea(e){
-	try {
-		localObj = JSON.parse(localStorage.getItem("feedback-form-state"));
-		if(localObj === null){
-			return;
+function populateTextarea(){
+	localObj = JSON.parse(localStorage.getItem("feedback-form-state"));
+	console.log(localObj);
+	if(localObj === null){
+		return;
+	} else {
+		for (const key in localObj) {
+			
+			form[key].value = localObj[key];
 		}
-		  for (const key in localObj) {
-			form[key].value = localObj[key]
-		  }
 	}
-	catch {
-		alert("Error"); 
-	}
-} 
+}
