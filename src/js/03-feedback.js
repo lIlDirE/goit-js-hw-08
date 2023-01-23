@@ -25,14 +25,19 @@ function addLocalStorage(e){
 }
 
 function populateTextarea(){
-	localObj = JSON.parse(localStorage.getItem("feedback-form-state"));
-	console.log(localObj);
-	if(localObj === null){
+	try {
+	const checkingLocalStorage = localStorage.getItem("feedback-form-state"); //localObj обьявлен глобально и не вижу как его можно использовать с проверкой на null(иначе работает не корректно для строки которую не заполняли после обновления страницы)
+	if(checkingLocalStorage === null){
 		return;
-	} else {
-		for (const key in localObj) {
-			
+	} 
+	else {
+		localObj = JSON.parse(localStorage.getItem("feedback-form-state"));
+		for (const key in localObj) {			
 			form[key].value = localObj[key];
-		}
+			}
+		} 
 	}
+	catch (err) { 
+		console.log("JSON.parse error");  
+	  }
 }
